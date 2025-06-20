@@ -1,0 +1,13 @@
+PROJECT_NAME           = MinJSON
+OUTPUT_DIRECTORY       = docs
+INPUT                  = include
+RECURSIVE              = YES
+GENERATE_LATEX         = NO
+EXTRACT_ALL            = YES
+GENERATE_TREEVIEW      = YES
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+DOT_PATH               = /usr/bin/dot
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
