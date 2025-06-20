@@ -1,93 +1,501 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>MinJSON – Документация</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #121212;
-      color: #eee;
-    }
-    pre {
-      background: #1e1e1e;
-      color: #c9d1d9;
-      padding: 1em;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-    h1, h2, h3 {
-      color: #ffca28;
-    }
-    a {
-      color: #90caf9;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinJSON - Документация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3d5afe;
+            --secondary: #5e35b1;
+            --accent: #ff4081;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            padding-top: 70px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            background: white;
+            box-shadow: 0 0 25px rgba(0,0,0,0.08);
+            border-radius: 15px;
+            padding: 20px 0;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(120deg, #e0f7fa, #f3e5f5);
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .method-badge {
+            background: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        
+        .example-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .type-badge {
+            background: #e3f2fd;
+            color: var(--primary);
+            font-family: monospace;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 15px;
+            overflow-x: auto;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 28px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a237e, #311b92);
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 5px 0;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(61, 90, 254, 0.1);
+            color: var(--primary);
+        }
+        
+        .method-card {
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .method-card:hover {
+            border-left: 4px solid var(--accent);
+            background-color: rgba(61, 90, 254, 0.03);
+        }
+    </style>
 </head>
-<body class="container py-5">
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-bolt me-2"></i>
+                <strong>MinJSON</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#overview"><i class="fas fa-home me-1"></i> Обзор</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#api"><i class="fas fa-code me-1"></i> API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#examples"><i class="fas fa-play-circle me-1"></i> Примеры</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download"><i class="fas fa-download me-1"></i> Скачать</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <h1 class="mb-4">📘 MinJSON — JSON для C++20</h1>
+    <div class="container my-5">
+        <div class="row">
+            <!-- Боковая панель -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="sidebar">
+                    <h5 class="px-4 mb-3 fw-bold">Навигация</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#overview">Обзор библиотеки</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#parsing">Парсинг JSON</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#serialization">Сериализация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#access">Доступ к данным</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#reflection">Рефлексия</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#examples">Примеры использования</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#best-practices">Лучшие практики</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-5 px-4">
+                        <h5 class="mb-3 fw-bold">Быстрые ссылки</h5>
+                        <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-2">
+                            <i class="fab fa-github me-1"></i> Исходный код
+                        </a>
+                        <a href="#" class="btn btn-sm btn-primary w-100">
+                            <i class="fas fa-download me-1"></i> Скачать v1.0
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Основной контент -->
+            <div class="col-lg-9">
+                <!-- Заголовок -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold mb-3">MinJSON <span class="text-primary">Документация</span></h1>
+                    <p class="lead text-muted">Высокопроизводительная JSON-библиотека для C++20 с поддержкой рефлексии</p>
+                </div>
+                
+                <!-- Обзор -->
+                <section id="overview" class="content-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-star me-2"></i> Обзор библиотеки</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <p class="lead">
+                                    MinJSON - это легковесная, высокопроизводительная библиотека для работы с JSON в C++20. 
+                                    Она сочетает простоту использования с современными возможностями языка.
+                                </p>
+                                <p>
+                                    Ключевые особенности:
+                                </p>
+                                <ul>
+                                    <li>Парсинг и сериализация JSON</li>
+                                    <li>Доступ к данным через path-выражения</li>
+                                    <li>Поддержка рефлексии для пользовательских типов</li>
+                                    <li>Исключения или error коды на выбор</li>
+                                    <li>Минималистичный заголовочный файл</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-4 text-center">
+                                    <div class="d-inline-block p-4 rounded-3" style="background: linear-gradient(135deg, #e3f2fd, #f3e5f5);">
+                                        <i class="fas fa-bolt text-primary" style="font-size: 5rem;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center p-3">
+                                    <div class="feature-icon mx-auto">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <h4>Высокая производительность</h4>
+                                    <p>Оптимизированные алгоритмы парсинга и минимальные накладные расходы</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center p-3">
+                                    <div class="feature-icon mx-auto">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <h4>Современный C++20</h4>
+                                    <p>Использование концептов, std::variant и других возможностей C++20</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center p-3">
+                                    <div class="feature-icon mx-auto">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <h4>Простота интеграции</h4>
+                                    <p>Единственный заголовочный файл без внешних зависимостей</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Парсинг -->
+                <section id="parsing" class="content-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-paragraph me-2"></i> Парсинг JSON</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <p>
+                            Для парсинга JSON-строк используйте метод <code>parse()</code>. Он возвращает 
+                            <code>Result&lt;Value&gt;</code> - вариант, содержащий либо значение, либо ошибку.
+                        </p>
+                        
+                        <div class="method-card p-4 mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">parse()</h4>
+                                <span class="method-badge">public method</span>
+                            </div>
+                            <code class="d-block my-3 text-primary">
+                                Result&lt;Value&gt; parse(std::string_view input) noexcept
+                            </code>
+                            <p class="mb-0">
+                                Парсит JSON из строки. Возвращает <code>Value</code> при успехе или <code>Error</code> при ошибке.
+                            </p>
+                        </div>
+                        
+                        <button class="btn example-btn text-white" data-bs-toggle="modal" data-bs-target="#parsingExample">
+                            <i class="fas fa-code me-2"></i> Показать пример
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Пример парсинга в модальном окне -->
+                <div class="modal fade" id="parsingExample" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Пример парсинга JSON</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <pre><code class="cpp">#include "minjson.h"
+#include &lt;iostream>
 
-  <p>MinJSON — это лёгкая, производительная JSON-библиотека для C++20 с поддержкой:</p>
-  <ul>
-    <li>📌 C++20 concepts (<code>MinJSONValueType</code>)</li>
-    <li>📌 Универсальный <code>std::any</code> для хранения значений</li>
-    <li>📌 Безопасный доступ через пути: <code>"user.friends[0].name"</code></li>
-    <li>📌 Макросная рефлексия для сериализации структур</li>
-    <li>📌 Простая сериализация и десериализация</li>
-  </ul>
+int main() {
+    MinJSON json;
+    std::string input = R"({
+        "name": "Alice",
+        "age": 30,
+        "scores": [95, 88, 92]
+    })";
+    
+    auto result = json.parse(input);
+    
+    if (auto* value = std::get_if&lt;MinJSON::Value>(&result)) {
+        std::string name = json.get&lt;std::string>(*value, "name", "");
+        int age = json.get&lt;int>(*value, "age", 0);
+        auto scores = json.get&lt;std::vector&lt;int>>(*value, "scores", {});
+        
+        std::cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; "\n";
+        std::cout &lt;&lt; "Age: " &lt;&lt; age &lt;&lt; "\n";
+        std::cout &lt;&lt; "Scores: ";
+        for (int score : scores) {
+            std::cout &lt;&lt; score &lt;&lt; " ";
+        }
+    } 
+    else if (auto* err = std::get_if&lt;MinJSON::Error>(&result)) {
+        std::cerr &lt;&lt; "Error: " &lt;&lt; *err &lt;&lt; "\n";
+    }
+    
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Доступ к данным -->
+                <section id="access" class="content-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-key me-2"></i> Доступ к данным</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <p>
+                            MinJSON предоставляет несколько способов доступа к данным в JSON-структуре:
+                        </p>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="p-4 h-100" style="background-color: #f8f9fa; border-radius: 10px;">
+                                    <h4>Path-выражения</h4>
+                                    <p>
+                                        Доступ к вложенным данным с помощью строки пути:
+                                    </p>
+                                    <ul>
+                                        <li><code>"user.name"</code> - доступ к свойству</li>
+                                        <li><code>"items[0].id"</code> - доступ к элементу массива</li>
+                                        <li><code>"data.stats[1].value"</code> - комбинированный доступ</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="p-4 h-100" style="background-color: #f8f9fa; border-radius: 10px;">
+                                    <h4>Типизированный доступ</h4>
+                                    <p>
+                                        Получение значений с автоматическим преобразованием типов:
+                                    </p>
+                                    <ul>
+                                        <li><code>get&lt;int&gt;(value, "age")</code></li>
+                                        <li><code>get&lt;std::string&gt;(value, "name")</code></li>
+                                        <li><code>get&lt;std::vector&lt;double&gt;&gt;(value, "prices")</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt-4">Методы доступа</h4>
+                        
+                        <div class="method-card p-4 mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">get()</h5>
+                                <span class="method-badge">template method</span>
+                            </div>
+                            <code class="d-block my-2 text-primary">
+                                template &lt;MinJSONValueType T&gt;<br>
+                                T get(const Value&amp; root, std::string_view path, const T&amp; default_val = {}) const
+                            </code>
+                            <p class="mb-1">
+                                Получает значение по указанному пути. Возвращает default_val если путь не найден.
+                            </p>
+                            <div class="mt-2">
+                                <span class="badge type-badge">T</span>
+                                <span class="text-muted">Тип возвращаемого значения</span>
+                            </div>
+                        </div>
+                        
+                        <div class="method-card p-4 mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">get_checked()</h5>
+                                <span class="method-badge">template method</span>
+                            </div>
+                            <code class="d-block my-2 text-primary">
+                                template &lt;MinJSONValueType T&gt;<br>
+                                Result&lt;T&gt; get_checked(const Value&amp; root, std::string_view path) const
+                            </code>
+                            <p class="mb-1">
+                                Получает значение по указанному пути. Возвращает <code>Result&lt;T&gt;</code> 
+                                с ошибкой если путь не найден или тип не совпадает.
+                            </p>
+                        </div>
+                        
+                        <button class="btn example-btn text-white mt-2" data-bs-toggle="modal" data-bs-target="#accessExample">
+                            <i class="fas fa-code me-2"></i> Пример доступа к данным
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4>MinJSON</h4>
+                    <p>Легковесная, высокопроизводительная JSON-библиотека для современных проектов на C++20.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Ссылки</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Документация</a></li>
+                        <li><a href="https://github.com/BattleGrounds/MinJSON" class="text-white">GitHub репозиторий</a></li>
+                        <li><a href="#parsingExample" class="text-white">Примеры использования</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Контакты</h5>
+                    <p>Поддержка и вопросы: <a href="noflowerdev@icloud.com" class="text-white">noflowerdev@icloud.com</a></p>
+                    <div class="d-flex mt-3">
+                        <a href="https://github.com/BattleGrounds/MinJSON" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-discord fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 bg-light">
+            <div class="text-center pt-2">
+                <p>&copy; 2023 MinJSON Project. MIT License.</p>
+            </div>
+        </div>
+    </footer>
 
-  <h2 class="mt-5">🔧 Поддерживаемые типы</h2>
-  <p><code>int</code>, <code>double</code>, <code>bool</code>, <code>std::string</code>, <code>nullptr</code></p>
-  <p><code>std::optional&lt;T&gt;</code>, <code>std::vector&lt;T&gt;</code> — если <code>T</code> также поддерживается</p>
-
-  <h2 class="mt-5">🚀 Быстрый старт</h2>
-  <pre><code>#include "MinJSON.hpp"
-
-MinJSON json;
-auto result = json.parse(R"({"name":"Alice","age":30})");
-
-if (std::holds_alternative&lt;MinJSON::Error&gt;(result)) {
-    std::cerr &lt;&lt; "Ошибка: " &lt;&lt; std::get&lt;MinJSON::Error&gt;(result) &lt;&lt; "\\n";
-}
-
-const auto& val = std::get&lt;MinJSON::Value&gt;(result);
-std::string name = json.get&lt;std::string&gt;(val, "name");
-int age = json.get&lt;int&gt;(val, "age");
-</code></pre>
-
-  <h2 class="mt-5">🧩 Макросная рефлексия</h2>
-  <pre><code>struct User {
-    int id;
-    std::string name;
-};
-
-MINJSON_REGISTER_TYPE(User,
-    MINJSON_FIELD(id)
-    MINJSON_FIELD(name)
-)
-
-MinJSON json;
-MinJSON_register_User(json);
-
-User user{42, "Bob"};
-auto json_val = json.to_json(user);
-std::cout &lt;&lt; json.stringify(json_val, true);
-</code></pre>
-
-  <h2 class="mt-5">📘 Основные методы API</h2>
-  <ul>
-    <li><code>parse(string_view json)</code> — парсинг строки</li>
-    <li><code>stringify(Value val)</code> — сериализация</li>
-    <li><code>get&lt;T&gt;(Value, path, default)</code> — безопасный доступ с дефолтом</li>
-    <li><code>get_checked&lt;T&gt;</code> — доступ с проверкой ошибок</li>
-    <li><code>set(Value&amp;, path, value)</code> — установка значения по пути</li>
-    <li><code>to_json(obj)</code> и <code>from_json&lt;T&gt;(val)</code> — через макросную рефлексию</li>
-  </ul>
-
-  <h2 class="mt-5">📄 Лицензия</h2>
-  <p>MIT License — свободно для личного и коммерческого использования.</p>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Активация навигации при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
